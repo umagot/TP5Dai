@@ -1,45 +1,21 @@
-//app.use("/api/province",ProvinciasRouter)
-import express from "express";
-//import ProvinciasRouter from "./src/controllers/province-controller.js"
-import cors from "cors";
+// index.js
 const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const eventRoutes = require('./routes/events');
-
 const app = express();
+const pool = require('./db');
+require('dotenv').config();
+
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('API está funcionando...');
+});
+
+// Importar las rutas
+const eventRoutes = require('./routes/events');
 app.use('/api/event', eventRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+  console.log(`Servidor está corriendo en el puerto ${PORT}`);
 });
-
-
-
-//Router
-//provincias-controller.jd
-/*import {router} from "expresss"
-const router = Router();
-
-router.put('/:id', async (req,res)=> {
-let id = req.params.id;
-let entidad = req.body;
-const registrosAfectados = await svc.update(id, entidad);
-return res.status(StatusCodes.OK).json(registrosAfectados);
-})
-
-router.get("/llamada", (req, res));
-
-export default ProvinciasRouter;
-
-router.put
-
-
-//index
-*/
-
